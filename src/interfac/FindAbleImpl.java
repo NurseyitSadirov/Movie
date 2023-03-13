@@ -120,15 +120,19 @@ public class FindAbleImpl implements Findable {
     public void findMovieByDescription(List<Movie> movies) {
         System.out.println("Write the description of the movie");
         String description = new Scanner(System.in).nextLine().toUpperCase();
+        List<Movie> list = new ArrayList<>();
         try {
             for (Movie movie : movies) {
                 if (movie.getDescription().toUpperCase().equals(description)) {
-                    System.out.println(movie);
-                } else {
-                    throw new NullPointerException("We don't have such a description");
+                    list.add(movie);
                 }
             }
-        } catch (NullPointerException e) {
+            if (!list.isEmpty()){
+                System.out.println(list);
+            }else {
+                throw new NullPoint("No description");
+            }
+        } catch (NullPoint e) {
             System.out.println("~~~~~~~~~~~~~");
             System.out.println(e.getMessage());
             System.out.println("~~~~~~~~~~~~~");
