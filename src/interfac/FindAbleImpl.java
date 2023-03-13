@@ -102,11 +102,12 @@ public class FindAbleImpl implements Findable {
             for (Movie movie : movies) {
                 if (movie.getDirector().getName().toUpperCase().trim().equals(directorName)) {
                     results.add(movie);
-                } else {
-                    throw new NullPoint("No director");
                 }
+            }if (!results.isEmpty()) {
+                System.out.println(results);
+            }else {
+                throw new NullPoint("No director");
             }
-            System.out.println(results);
 
         } catch (NullPoint e) {
             System.out.println("~~~~~~~~~~~~~");
