@@ -39,6 +39,7 @@ public class FindAbleImpl implements Findable {
         } catch (Exception e) {
             System.out.println("~~~~~~~~~~~~~");
             System.out.println(e.getMessage());
+            System.out.println("~~~~~~~~~~~~~");
         }
     }
 
@@ -142,7 +143,8 @@ public class FindAbleImpl implements Findable {
     @Override
     public void findMovieByRole(List<Movie> movies) {
         System.out.println("Write the role of the movie");
-        List<Movie> list = new ArrayList<>();        try {
+        List<Movie> list = new ArrayList<>();
+        try {
             String role = new Scanner(System.in).nextLine().toUpperCase().trim();
             List<Movie> movies1 = new ArrayList<>();
             for (Movie movie : movies) {
