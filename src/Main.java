@@ -52,6 +52,7 @@ public class Main {
                 case 8-> sortAble.sortByMovieName(movies);
                 case 9-> sortAble.sortByYear(movies);
                 case 10-> sortAble.sortByDirector(movies);
+                default -> System.out.println("Mynday san jok");
             }
         }
     }
