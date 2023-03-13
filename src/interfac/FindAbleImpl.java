@@ -1,6 +1,10 @@
 package interfac;
+
 import clas.Cast;
 import clas.Movie;
+import clas.NullPoint;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,75 +20,95 @@ public class FindAbleImpl implements Findable {
     @Override
     public void findMovieByName(List<Movie> movies) {
         System.out.println("Write the name of the movie ");
-        String name = new Scanner(System.in).nextLine().toUpperCase().trim();
+        String name = new Scanner(System.in).nextLine();
+        List<Movie> list = new ArrayList<>();
+        int counter = 0;
         try {
-            for (Movie movie : movies) {
-                if (movie.getName().toUpperCase().trim().equals(name)) {
-                    System.out.println(movie);
-                } else {
-                    throw new RuntimeException("There is no such film");
+            for (Movie m : movies) {
+                if (m.getName().toUpperCase().toUpperCase().trim().equals(name.toUpperCase().trim())) {
+                    counter++;
+                    list.add(m);
                 }
+            }
+
+            if (counter > 0) {
+                System.out.println(list);
+            } else {
+                throw new Exception("Not found!");
             }
         } catch (Exception e) {
             System.out.println("~~~~~~~~~~~~~");
             System.out.println(e.getMessage());
-            System.out.println("~~~~~~~~~~~~~");
         }
     }
 
     @Override
     public void findMovieByActorName(List<Movie> movies) {
         System.out.println("Write the name of the actor ");
-        String actorName = new Scanner(System.in).nextLine();
+        List<Movie> result = new ArrayList<>();
+        String actorName = new Scanner(System.in).nextLine().toUpperCase().trim();
         try {
             for (Movie movie : movies) {
-                if (movie.getCast().get(0).getActorFullName().equals(actorName)) {
-                    System.out.println(movie);
-                } else {
-                    throw new NullPointerException("No such of the actor");
+                for (Cast c : movie.getCast()) {
+                    if (c.getActorFullName().toUpperCase().trim().contains(actorName)) {
+                        result.add(movie);
+                    }
                 }
             }
-        } catch (Exception e) {
+            if (!result.isEmpty()){
+                System.out.println(result);
+            }else {
+                throw new NullPoint("No such of the actor");
+            }
+        } catch (NullPoint e) {
             System.out.println("~~~~~~~~~~~~~");
             System.out.println(e.getMessage());
             System.out.println("~~~~~~~~~~~~~");
         }
-
     }
 
     @Override
     public void findMovieByYear(List<Movie> movies) {
         System.out.println("Write the year of the movie");
         int year = new Scanner(System.in).nextInt();
+        List<Movie> list = new ArrayList<>();
         try {
             for (Movie movie : movies) {
                 if (movie.getYear() == year) {
-                    System.out.println(movie);
-                } else {
-                    throw new ArithmeticException("There is no movie this year");
+                    list.add(movie);
                 }
             }
-        } catch (ArithmeticException e) {
+
+            if (!list.isEmpty()) {
+                System.out.println(list);
+            } else {
+                throw new NullPoint("Not found!");
+            }
+        } catch (NullPoint e) {
             System.out.println("~~~~~~~~~~~~~");
             System.out.println(e.getMessage());
             System.out.println("~~~~~~~~~~~~~");
+
         }
 
     }
 
     @Override
     public void findMovieByDirector(List<Movie> movies) {
-        System.out.println("Write the director of the movie");
-        String directorName = new Scanner(System.in).nextLine().toUpperCase().trim();
         try {
+            List<Movie> results = new ArrayList<>();
+            System.out.println("Write the director of the movie");
+            String directorName = new Scanner(System.in).nextLine().toUpperCase().trim();
             for (Movie movie : movies) {
-                if (movie.getDirector().getName().toUpperCase().trim().contains(directorName)){
-                    System.out.println(movie);
-                }else {
-                    throw new NullPointerException("We don't have such a director");
+                if (movie.getDirector().getName().toUpperCase().trim().equals(directorName)) {
+                    results.add(movie);
+                } else {
+                    throw new NullPoint("No director");
                 }
             }
-        }catch (NullPointerException e){
+            System.out.println(results);
+
+        } catch (NullPoint e) {
             System.out.println("~~~~~~~~~~~~~");
             System.out.println(e.getMessage());
             System.out.println("~~~~~~~~~~~~~");
@@ -97,13 +121,13 @@ public class FindAbleImpl implements Findable {
         String description = new Scanner(System.in).nextLine().toUpperCase();
         try {
             for (Movie movie : movies) {
-                if (movie.getDescription().toUpperCase().equals(description)){
+                if (movie.getDescription().toUpperCase().equals(description)) {
                     System.out.println(movie);
-                }else {
+                } else {
                     throw new NullPointerException("We don't have such a description");
                 }
             }
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("~~~~~~~~~~~~~");
             System.out.println(e.getMessage());
             System.out.println("~~~~~~~~~~~~~");
@@ -113,18 +137,23 @@ public class FindAbleImpl implements Findable {
     @Override
     public void findMovieByRole(List<Movie> movies) {
         System.out.println("Write the role of the movie");
-        String role = new Scanner(System.in).nextLine().toUpperCase().trim();
-        try {
+        List<Movie> list = new ArrayList<>();        try {
+            String role = new Scanner(System.in).nextLine().toUpperCase().trim();
+            List<Movie> movies1 = new ArrayList<>();
             for (Movie movie : movies) {
-                for (Cast c:movie.getCast()) {
-                if (c.getRole().toUpperCase().trim().equals(role)){
-                    System.out.println(movie);
-                }else {
-                    throw new RuntimeException("There is no actor in this role");
+                for (Cast c : movie.getCast()) {
+                    if (c.getRole().toUpperCase().trim().equals(role)) {
+                        list.add(movie);
+                    }
                 }
             }
+            if (!list.isEmpty()){
+                System.out.println(list);
+            }else {
+                throw new NullPoint("There is no actor in this role");
             }
-        }catch (RuntimeException e){
+            System.out.println(movies1);
+        } catch (NullPoint e) {
             System.out.println("~~~~~~~~~~~~~");
             System.out.println(e.getMessage());
             System.out.println("~~~~~~~~~~~~~");

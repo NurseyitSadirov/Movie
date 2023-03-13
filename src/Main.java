@@ -3,24 +3,23 @@ import clas.Director;
 import clas.Movie;
 import interfac.FindAbleImpl;
 import interfac.SortAbleImpl;
-
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Cast> casts = new ArrayList<>();
-        casts.add(new Cast("Vin diesel","Dominic"));
-        ArrayList<Cast> casts1 = new ArrayList<>();
-        casts1.add(new Cast("Robert Patinson","Eduard"));
+        ArrayList<Cast> casts = new ArrayList<>(List.of(
+                new Cast("Vin diesel","Dominic"),
+                new Cast("Robert Syimyk","Eduard")));
 
         Director director1 = new Director("c","Ken");
         Director director2 = new Director("Bob","Ken");
         Director director3 = new Director("Aob","Ken");
         ArrayList<Movie> movies = new ArrayList<>();
-        movies.add( new Movie("Forsaj 7 ",2023,"Fantastic",director1,casts));
-        movies.add( new Movie("Forsaj 6 ",2011,"History",director2,casts1));
-        movies.add( new Movie("Forsaj 3 ",2020,"Romantic",director3,casts));
+        movies.add( new Movie("Forsaj 7",2023,"Fantastic",director1,casts));
+        movies.add( new Movie("Forsaj 6",2011,"History",director2,casts));
+        movies.add( new Movie("Forsaj 3",2020,"Romantic",director3,casts));
 
         FindAbleImpl findAble = new FindAbleImpl();
         SortAbleImpl sortAble = new SortAbleImpl();
